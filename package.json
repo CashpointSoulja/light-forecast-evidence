@@ -8,9 +8,11 @@
     "dev": "wrangler dev",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "eval": "tsx eval/run.ts",
-    "eval:broken": "tsx eval/run.ts --broken-rule",
-    "check:deploy": "wrangler deploy --dry-run --outdir .wrangler/dry-run"
+    "eval": "tsx eval/run.mts",
+    "eval:broken": "tsx eval/run.mts --broken-rule",
+    "check:deploy": "wrangler deploy --dry-run --outdir .wrangler/dry-run",
+    "fixtures": "node scripts/embed-fixtures.mjs",
+    "check:fixtures": "node scripts/embed-fixtures.mjs --check"
   },
   "license": "MIT",
   "devDependencies": {

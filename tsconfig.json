@@ -11,5 +11,5 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src", "test", "eval", "fixtures"]
+  "include": ["src", "test", "eval/**/*.mts", "eval"]
 }
