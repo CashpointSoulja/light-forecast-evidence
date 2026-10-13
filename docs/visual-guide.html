@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Visual guide · Forecast Evidence Workbench</title>
+<link rel="stylesheet" href="../public/css/tokens.css">
+<style>
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:15px}
+.strip{background:var(--ink);color:var(--on-dark);padding:10px 32px;font-size:13px}
+.wrap{padding:28px 32px;display:grid;gap:22px}
+h1{font-family:var(--serif);font-weight:400;font-size:44px;letter-spacing:-.01em;margin:0}
+h2{font-family:var(--serif);font-weight:400;font-size:24px;margin:0 0 12px}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:500;color:var(--muted)}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{border-radius:var(--r-panel);padding:24px}
+.cream{background:var(--cream)}.dark{background:var(--ink);color:var(--on-dark)}
+.sw{border-radius:var(--r-card);border:1px solid var(--hair);overflow:hidden}
+.sw div:first-child{height:64px}.sw p{margin:8px 12px;font-size:13px}
+.chip{display:inline-flex;gap:6px;align-items:center;border-radius:var(--r-pill);padding:4px 10px;font-size:13px;font-weight:500}
+.ok{color:var(--ok-fg);background:var(--ok-bg)}.warn{color:var(--warn-fg);background:var(--warn-bg)}.miss{color:var(--miss-fg);background:var(--miss-bg);box-shadow:inset 0 0 0 1px rgba(184,51,0,.35)}.unk{color:var(--unk-fg);background:var(--unk-bg)}
+.btn{border-radius:var(--r-pill);padding:11px 20px;font:500 15px var(--sans);border:1px solid var(--ink);background:var(--ink);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--hair-strong)}
+.btn.focus{outline:3px solid var(--vermilion);outline-offset:3px}
+.nav{display:inline-flex;gap:4px;border:1px solid var(--hair);border-radius:var(--r-pill);padding:5px;box-shadow:var(--shadow)}
+.nav span{padding:7px 14px;border-radius:var(--r-pill);font-size:14px}.nav .on{background:var(--ink);color:#fff}
+.num{font-variant-numeric:tabular-nums;font-size:30px;font-family:var(--serif)}
+.den{font-size:13px;color:var(--on-dark-muted)}
+.hdr{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.ctx{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--hair);border-radius:var(--r-pill);padding:6px 14px;font-size:13px;color:var(--muted)}
+.ctx img{width:100px;height:auto}
+small{color:var(--muted)}
+</style></head><body>
+<div class="strip">Synthetic data: fictional companies, people and amounts. No CRM, ERP or email connection.</div>
+<div class="wrap">
+ <div class="hdr"><div><div class="eyebrow">Visual guide · committed before app code</div><h1>Forecast Evidence Workbench</h1><small>Independent concept by Ayo Ahmed. Not affiliated with or endorsed by Light.</small></div>
+ <span class="ctx">Concept for <img src="../public/brand/light-logo-wordmark-black-artwork.svg" alt="Light"></span></div>
+ <div><h2>Colour</h2><div class="row">
+  <div class="sw"><div style="background:#1F2022"></div><p><b>Ink #1F2022</b><br>text, primary button, dark panel</p></div>
+  <div class="sw"><div style="background:#FFEDE5"></div><p><b>Cream #FFEDE5</b><br>status panel (14.36:1 with ink)</p></div>
+  <div class="sw"><div style="background:#FF4800"></div><p><b>Vermilion #FF4800</b><br>fills, markers, focus only</p></div>
+  <div class="sw"><div style="background:#B83300"></div><p><b>Vermilion text #B83300</b><br>5.98:1 on white</p></div>
+ </div></div>
+ <div class="split">
+  <div><h2>Type</h2><div style="font-family:var(--serif);font-size:34px;letter-spacing:-.01em">Lora 400: forecast, with evidence.</div>
+  <p style="font-size:17px">Rethink Sans 400 body at 17 px. <b style="font-weight:600">600 for emphasis.</b> <span style="font-variant-numeric:tabular-nums">£1,284,500 · 18 of 20 rows</span></p>
+  <div class="eyebrow">Eyebrow label · uppercase · 0.08em</div></div>
+  <div><h2>Controls</h2><p><button class="btn">Commit import</button> <button class="btn ghost">Preview</button> <button class="btn focus">Focused</button></p>
+  <div class="nav"><span class="on">Import</span><span>Stage gates</span><span>Reconcile</span><span>Board narrative</span><span>Evaluation</span></div></div>
+ </div>
+ <div><h2>Evidence states: label + glyph, never colour alone</h2>
+  <span class="chip ok">✓ Evidenced</span> <span class="chip warn">◷ Stale</span> <span class="chip miss">! Missing</span> <span class="chip unk">? Unknown</span> <span class="chip unk">~ Claimed, no ref</span> <span class="chip miss">Superseded narrative</span> <span class="chip warn">Rep call ahead of evidence</span></div>
+ <div class="split">
+  <div class="panel cream"><div class="eyebrow">Workspace · revision 4</div><h2 style="margin-top:8px">As of 2026-10-09 · synthetic-crm-export.csv</h2><p>Narrative r3 superseded by r4. Regenerate before the board pack.</p></div>
+  <div class="panel dark"><div class="eyebrow" style="color:var(--on-dark-muted)">Gross pipeline (GBP)</div><div class="num">£2,410,300</div><div class="den">17 of 18 open opportunities converted · 1 excluded: no SEK rate</div></div>
+ </div>
+</div></body></html>

@@ -1,0 +1,27 @@
+{
+  "name": "light-forecast-evidence",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Forecast Evidence Workbench: independent concept by Ayo Ahmed. Not affiliated with Light.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "eval": "tsx eval/run.ts",
+    "eval:broken": "tsx eval/run.ts --broken-rule",
+    "check:deploy": "wrangler deploy --dry-run --outdir .wrangler/dry-run"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261013.1",
+    "@fontsource/hedvig-letters-serif": "^5.3.1",
+    "@fontsource/lora": "^5.3.0",
+    "@fontsource/rethink-sans": "^5.3.0",
+    "playwright-core": "^1.64.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7",
+    "wrangler": "^4.150.0"
+  }
+}
