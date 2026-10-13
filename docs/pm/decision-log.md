@@ -17,3 +17,4 @@
 | D13 | 2026-10-13 | Broken-rule mode `eb-named-counts-as-engaged` | A plausible real-world shortcut, and it shows the evaluation catches it |
 | D14 | 2026-10-13 | No inline styles; strict CSP | Hostile-content defence in depth |
 | D15 | 2026-10-13 | Prepare Workers Free config and dry run only, no deploy | Owner instruction |
+| D16 | 2026-10-13 | Ship the grounded walkthrough script and a deterministic recording flow, not a final video | Owner records the public demo after audit and deployment |

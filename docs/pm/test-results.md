@@ -27,5 +27,6 @@ See [`docs/screenshots/`](../screenshots/).
 
 ## Not tested
 - Real deployment on Cloudflare (dry run only, by instruction).
+- Final public-demo video: not produced here. The script and deterministic flow are in [`video/`](../../video/README.md). A local rehearsal confirmed about 96 s of narration and no silence of 0.6 s or more.
 - Real browsers other than Chromium; screen readers beyond axe's automated rules.
 - Any real CRM data or real forecast accuracy.

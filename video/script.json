@@ -1,0 +1,411 @@
+[
+ {
+  "id": "s01",
+  "cap": [
+   "Forecast Evidence Workbench: an independent concept by Ayo Ahmed.",
+   "Every record here is synthetic."
+  ],
+  "dur": 6.045,
+  "phrases": [
+   {
+    "cap": "Forecast Evidence Workbench: an independent concept by Ayo Ahmed.",
+    "wav": "vo/s01-0.wav",
+    "start": 0.0,
+    "dur": 4.074
+   },
+   {
+    "cap": "Every record here is synthetic.",
+    "wav": "vo/s01-1.wav",
+    "start": 4.254,
+    "dur": 1.791
+   }
+  ]
+ },
+ {
+  "id": "s02",
+  "cap": [
+   "First, a hostile file.",
+   "Formulas, hidden control characters and a duplicate ID",
+   "are rejected row by row, so commit stays locked."
+  ],
+  "dur": 8.468,
+  "phrases": [
+   {
+    "cap": "First, a hostile file.",
+    "wav": "vo/s02-0.wav",
+    "start": 0.0,
+    "dur": 1.802
+   },
+   {
+    "cap": "Formulas, hidden control characters and a duplicate ID",
+    "wav": "vo/s02-1.wav",
+    "start": 1.982,
+    "dur": 3.596
+   },
+   {
+    "cap": "are rejected row by row, so commit stays locked.",
+    "wav": "vo/s02-2.wav",
+    "start": 5.758,
+    "dur": 2.71
+   }
+  ]
+ },
+ {
+  "id": "s03",
+  "cap": [
+   "The clean sample previews thirteen opportunities.",
+   "Each row keeps its exact source reference,",
+   "and nothing is saved yet."
+  ],
+  "dur": 6.622,
+  "phrases": [
+   {
+    "cap": "The clean sample previews thirteen opportunities.",
+    "wav": "vo/s03-0.wav",
+    "start": 0.0,
+    "dur": 2.451
+   },
+   {
+    "cap": "Each row keeps its exact source reference,",
+    "wav": "vo/s03-1.wav",
+    "start": 2.631,
+    "dur": 2.253
+   },
+   {
+    "cap": "and nothing is saved yet.",
+    "wav": "vo/s03-2.wav",
+    "start": 5.064,
+    "dur": 1.558
+   }
+  ]
+ },
+ {
+  "id": "s04",
+  "cap": [
+   "Commit is one atomic step.",
+   "Confirming creates revision one."
+  ],
+  "dur": 3.587,
+  "phrases": [
+   {
+    "cap": "Commit is one atomic step.",
+    "wav": "vo/s04-0.wav",
+    "start": 0.0,
+    "dur": 1.627
+   },
+   {
+    "cap": "Confirming creates revision one.",
+    "wav": "vo/s04-1.wav",
+    "start": 1.807,
+    "dur": 1.78
+   }
+  ]
+ },
+ {
+  "id": "s05",
+  "cap": [
+   "Stage gates check the MEDDIC fields, the economic buyer,",
+   "pricing approval and the next step."
+  ],
+  "dur": 5.206,
+  "says": [
+   "Stage gates check the meddic fields, the economic buyer,",
+   "pricing approval and the next step."
+  ],
+  "phrases": [
+   {
+    "cap": "Stage gates check the MEDDIC fields, the economic buyer,",
+    "wav": "vo/s05-0.wav",
+    "start": 0.0,
+    "dur": 2.843
+   },
+   {
+    "cap": "pricing approval and the next step.",
+    "wav": "vo/s05-1.wav",
+    "start": 3.023,
+    "dur": 2.184
+   }
+  ]
+ },
+ {
+  "id": "s06",
+  "cap": [
+   "Halden Freight is called commit,",
+   "but its economic buyer was last engaged 53 days ago.",
+   "So it is not classifiable,",
+   "and the blocking gap is named."
+  ],
+  "dur": 8.683,
+  "says": [
+   "Halden Freight is called commit,",
+   "but its economic buyer was last engaged fifty three days ago.",
+   "So it is not classifiable,",
+   "and the blocking gap is named."
+  ],
+  "phrases": [
+   {
+    "cap": "Halden Freight is called commit,",
+    "wav": "vo/s06-0.wav",
+    "start": 0.0,
+    "dur": 1.949
+   },
+   {
+    "cap": "but its economic buyer was last engaged 53 days ago.",
+    "wav": "vo/s06-1.wav",
+    "start": 2.129,
+    "dur": 3.287
+   },
+   {
+    "cap": "So it is not classifiable,",
+    "wav": "vo/s06-2.wav",
+    "start": 5.596,
+    "dur": 1.474
+   },
+   {
+    "cap": "and the blocking gap is named.",
+    "wav": "vo/s06-3.wav",
+    "start": 7.25,
+    "dur": 1.433
+   }
+  ]
+ },
+ {
+  "id": "s07",
+  "cap": [
+   "Reconcile gives every total with its denominator.",
+   "Nine of ten open deals convert to pounds.",
+   "The Swiss franc deal has no imported rate,",
+   "so it is counted, not converted."
+  ],
+  "dur": 10.138,
+  "phrases": [
+   {
+    "cap": "Reconcile gives every total with its denominator.",
+    "wav": "vo/s07-0.wav",
+    "start": 0.0,
+    "dur": 2.698
+   },
+   {
+    "cap": "Nine of ten open deals convert to pounds.",
+    "wav": "vo/s07-1.wav",
+    "start": 2.878,
+    "dur": 2.576
+   },
+   {
+    "cap": "The Swiss franc deal has no imported rate,",
+    "wav": "vo/s07-2.wav",
+    "start": 5.634,
+    "dur": 2.099
+   },
+   {
+    "cap": "so it is counted, not converted.",
+    "wav": "vo/s07-3.wav",
+    "start": 7.913,
+    "dur": 2.225
+   }
+  ]
+ },
+ {
+  "id": "s08",
+  "cap": [
+   "Weighted on evidence, the forecast is about \u00a383,000 lower",
+   "than on reported stages.",
+   "That gap rests on labels, not proof."
+  ],
+  "dur": 8.266,
+  "says": [
+   "Weighted on evidence, the forecast is about eighty three thousand pounds lower",
+   "than on reported stages.",
+   "That gap rests on labels, not proof."
+  ],
+  "phrases": [
+   {
+    "cap": "Weighted on evidence, the forecast is about \u00a383,000 lower",
+    "wav": "vo/s08-0.wav",
+    "start": 0.0,
+    "dur": 4.196
+   },
+   {
+    "cap": "than on reported stages.",
+    "wav": "vo/s08-1.wav",
+    "start": 4.376,
+    "dur": 1.454
+   },
+   {
+    "cap": "That gap rests on labels, not proof.",
+    "wav": "vo/s08-2.wav",
+    "start": 6.01,
+    "dur": 2.256
+   }
+  ]
+ },
+ {
+  "id": "s09",
+  "cap": [
+   "The board narrative is built from the current revision only,",
+   "with named next actions for each owner."
+  ],
+  "dur": 4.963,
+  "phrases": [
+   {
+    "cap": "The board narrative is built from the current revision only,",
+    "wav": "vo/s09-0.wav",
+    "start": 0.0,
+    "dur": 2.819
+   },
+   {
+    "cap": "with named next actions for each owner.",
+    "wav": "vo/s09-1.wav",
+    "start": 2.999,
+    "dur": 1.963
+   }
+  ]
+ },
+ {
+  "id": "s10",
+  "cap": [
+   "Now I record a dated economic buyer meeting",
+   "for Halden Freight, with its source reference.",
+   "Saving creates revision two."
+  ],
+  "dur": 6.546,
+  "phrases": [
+   {
+    "cap": "Now I record a dated economic buyer meeting",
+    "wav": "vo/s10-0.wav",
+    "start": 0.0,
+    "dur": 2.294
+   },
+   {
+    "cap": "for Halden Freight, with its source reference.",
+    "wav": "vo/s10-1.wav",
+    "start": 2.474,
+    "dur": 2.445
+   },
+   {
+    "cap": "Saving creates revision two.",
+    "wav": "vo/s10-2.wav",
+    "start": 5.1,
+    "dur": 1.446
+   }
+  ]
+ },
+ {
+  "id": "s11",
+  "cap": [
+   "The older narrative is now superseded.",
+   "It is struck through,",
+   "and it cannot be marked board-ready."
+  ],
+  "dur": 5.338,
+  "says": [
+   "The older narrative is now superseded.",
+   "It is struck through,",
+   "and it cannot be marked board ready."
+  ],
+  "phrases": [
+   {
+    "cap": "The older narrative is now superseded.",
+    "wav": "vo/s11-0.wav",
+    "start": 0.0,
+    "dur": 2.327
+   },
+   {
+    "cap": "It is struck through,",
+    "wav": "vo/s11-1.wav",
+    "start": 2.507,
+    "dur": 0.912
+   },
+   {
+    "cap": "and it cannot be marked board-ready.",
+    "wav": "vo/s11-2.wav",
+    "start": 3.599,
+    "dur": 1.739
+   }
+  ]
+ },
+ {
+  "id": "s12",
+  "cap": [
+   "The evaluation compares expected and actual values.",
+   "31 of 31 pass."
+  ],
+  "dur": 5.242,
+  "says": [
+   "The evaluation compares expected and actual values.",
+   "Thirty one of thirty one pass."
+  ],
+  "phrases": [
+   {
+    "cap": "The evaluation compares expected and actual values.",
+    "wav": "vo/s12-0.wav",
+    "start": 0.0,
+    "dur": 3.377
+   },
+   {
+    "cap": "31 of 31 pass.",
+    "wav": "vo/s12-1.wav",
+    "start": 3.557,
+    "dur": 1.684
+   }
+  ]
+ },
+ {
+  "id": "s13",
+  "cap": [
+   "Switch on one deliberately broken rule,",
+   "which counts a named buyer as engaged,",
+   "and three cases turn red."
+  ],
+  "dur": 5.949,
+  "phrases": [
+   {
+    "cap": "Switch on one deliberately broken rule,",
+    "wav": "vo/s13-0.wav",
+    "start": 0.0,
+    "dur": 2.009
+   },
+   {
+    "cap": "which counts a named buyer as engaged,",
+    "wav": "vo/s13-1.wav",
+    "start": 2.189,
+    "dur": 1.995
+   },
+   {
+    "cap": "and three cases turn red.",
+    "wav": "vo/s13-2.wav",
+    "start": 4.364,
+    "dur": 1.586
+   }
+  ]
+ },
+ {
+  "id": "s14",
+  "cap": [
+   "No CRM, email or finance system is touched,",
+   "and no time savings are claimed.",
+   "Unknown evidence stays unknown."
+  ],
+  "dur": 7.092,
+  "phrases": [
+   {
+    "cap": "No CRM, email or finance system is touched,",
+    "wav": "vo/s14-0.wav",
+    "start": 0.0,
+    "dur": 3.208
+   },
+   {
+    "cap": "and no time savings are claimed.",
+    "wav": "vo/s14-1.wav",
+    "start": 3.388,
+    "dur": 1.75
+   },
+   {
+    "cap": "Unknown evidence stays unknown.",
+    "wav": "vo/s14-2.wav",
+    "start": 5.318,
+    "dur": 1.774
+   }
+  ]
+ }
+]

@@ -41,6 +41,7 @@ BASE=http://127.0.0.1:8787 CHROME=/path/to/chrome node scripts/ui-check.mjs
 - [PM package](docs/pm/README.md)
 - [Research and sources](research/)
 - [Publication notes and restrictions](PUBLICATION.md)
+- [Walkthrough script and recording flow](video/README.md) (the final video is recorded after deployment)
 
 ## Deployment
 Configured for Cloudflare Workers Free in `wrangler.jsonc` (SQLite Durable Objects). **Not deployed.** Run only the dry run until the owner approves a destination.

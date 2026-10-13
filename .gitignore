@@ -4,3 +4,6 @@ node_modules/
 *.tmp.*
 artifacts/tmp/
 scratch/
+video/build/
+video/*.mp4
+video/*.srt

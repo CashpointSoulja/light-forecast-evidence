@@ -14,6 +14,7 @@
 | C10 | WCAG 2.1 AA | axe automated rules at 1366px and 390px | Automated checks only. No manual screen-reader audit |
 
 ## Claims I do not make
+- No finished public-demo video is claimed. Only the script and the recording flow are included.
 - No interviews were conducted. All hypotheses are untested.
 - No time saved, forecast lift, accuracy improvement or adoption figures.
 - No knowledge of Light's internal processes, problems, CRM or data.
