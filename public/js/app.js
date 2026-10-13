@@ -100,7 +100,7 @@ function renderPreview(r) {
   ));
   if (p.file_errors.length) kids.push(h("div", { class: "error", role: "alert" }, h("strong", { text: "File rejected before row checks:" }), h("ul", {}, p.file_errors.map((e) => h("li", { text: e })))));
   if (p.rows.length) {
-    kids.push(h("div", { class: "tablewrap" }, h("table", { class: "stack" },
+    kids.push(h("div", { class: "tablewrap", tabindex: "0", role: "region", "aria-label": "Table (scrolls sideways on small screens)" }, h("table", { class: "stack" },
       h("caption", { class: "muted", text: "Each row and its exact source reference" }),
       h("thead", {}, h("tr", {}, h("th", { text: "Line" }), h("th", { text: "Opportunity" }), h("th", { text: "Status" }), h("th", { text: "Source ref" }))),
       h("tbody", {}, p.rows.map((row) => h("tr", {},
@@ -194,6 +194,11 @@ function syncEvFields() {
 }
 async function saveEvidence(e) {
   e.preventDefault();
+  if (!$("#ev-ref").value.trim()) {
+    const err = $("#ev-error"); err.textContent = "Add a synthetic source reference. Evidence without one is not accepted."; err.hidden = false;
+    $("#ev-ref").focus();
+    return;
+  }
   const r = await command(`/api/opportunities/${encodeURIComponent(evTarget.opp_id)}/evidence`, { field: $("#ev-field").value, text: $("#ev-text").value, date: $("#ev-date").value, ref: $("#ev-ref").value }, evKey);
   if (r.status === 200) {
     $("#evidence-dialog").close("saved");
@@ -220,7 +225,7 @@ function renderReconcile() {
   fill(box,
     h("div", { class: "grid3" }, metric(r.gross_pipeline, true), metric(r.weighted_reported), metric(r.weighted_evidenced), metric(r.closed_won)),
     h("div", { class: "panel" }, h("h3", { text: "Forecast categories from evidence" }),
-      h("div", { class: "tablewrap" }, h("table", { class: "stack" },
+      h("div", { class: "tablewrap", tabindex: "0", role: "region", "aria-label": "Table (scrolls sideways on small screens)" }, h("table", { class: "stack" },
         h("thead", {}, h("tr", {}, h("th", { text: "Category" }), h("th", { class: "num", text: "Open deals" }), h("th", { class: "num", text: "Not converted" }), h("th", { class: "num", text: "GBP (converted only)" }))),
         h("tbody", {}, r.categories.map((c) => h("tr", {}, h("td", { "data-label": "Category" }, chip(c.key, c.label)), h("td", { class: "num", "data-label": "Open deals", text: String(c.count) }), h("td", { class: "num", "data-label": "Not converted", text: String(c.not_converted) }), h("td", { class: "num", "data-label": "GBP", text: c.value.display })))),
       )),
@@ -284,7 +289,7 @@ function renderEval() {
       h("span", { text: `Classification agreement ${e.classification_accuracy.correct} of ${e.classification_accuracy.total} (${e.classification_accuracy.pct})` }),
       h("span", { text: `Coverage ${e.coverage.classifiable} of ${e.coverage.open} open deals classifiable (${e.coverage.pct})` })),
     h("p", { class: "help", text: e.note }),
-    h("div", { class: "tablewrap" }, h("table", { class: "stack" },
+    h("div", { class: "tablewrap", tabindex: "0", role: "region", "aria-label": "Table (scrolls sideways on small screens)" }, h("table", { class: "stack" },
       h("thead", {}, h("tr", {}, h("th", { text: "Case" }), h("th", { text: "Check" }), h("th", { text: "Expected" }), h("th", { text: "Actual" }), h("th", { text: "Result" }))),
       h("tbody", {}, e.cases.map((c) => h("tr", {}, h("td", { "data-label": "Case", class: "ref", text: c.id }), h("td", { "data-label": "Check", text: c.description }), h("td", { "data-label": "Expected", class: "ref", text: c.expected }), h("td", { "data-label": "Actual", class: "ref", text: c.actual }), h("td", { "data-label": "Result" }, chip(c.pass ? "pass" : "fail", c.pass ? "Pass" : "Fail"))))),
     )),

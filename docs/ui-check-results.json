@@ -1,0 +1,195 @@
+{
+  "base": "local wrangler dev",
+  "results": [
+    {
+      "name": "desktop-1366 hostile file commit disabled",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop-1366 markup rendered as text",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "axe desktop-1366 import",
+      "ok": true,
+      "detail": "27 rules passed"
+    },
+    {
+      "name": "desktop-1366 commit dialog modal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop-1366 Escape closes dialog without commit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop-1366 focus returns to commit button",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop-1366 commit creates revision 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop-1366 evidence without ref refused in dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop-1366 evidence saved as revision 2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "axe desktop-1366 gates",
+      "ok": true,
+      "detail": "21 rules passed"
+    },
+    {
+      "name": "axe desktop-1366 reconcile",
+      "ok": true,
+      "detail": "23 rules passed"
+    },
+    {
+      "name": "desktop-1366 no horizontal overflow on reconcile",
+      "ok": true,
+      "detail": "0px"
+    },
+    {
+      "name": "desktop-1366 older narrative superseded and locked",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "axe desktop-1366 narrative",
+      "ok": true,
+      "detail": "23 rules passed"
+    },
+    {
+      "name": "axe desktop-1366 evaluation",
+      "ok": true,
+      "detail": "24 rules passed"
+    },
+    {
+      "name": "desktop-1366 no page or console errors",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile-390 hostile file commit disabled",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile-390 markup rendered as text",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "axe mobile-390 import",
+      "ok": true,
+      "detail": "28 rules passed"
+    },
+    {
+      "name": "mobile-390 commit dialog modal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile-390 Escape closes dialog without commit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile-390 focus returns to commit button",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile-390 commit creates revision 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile-390 evidence without ref refused in dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile-390 evidence saved as revision 2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "axe mobile-390 gates",
+      "ok": true,
+      "detail": "22 rules passed"
+    },
+    {
+      "name": "axe mobile-390 reconcile",
+      "ok": true,
+      "detail": "24 rules passed"
+    },
+    {
+      "name": "mobile-390 no horizontal overflow on reconcile",
+      "ok": true,
+      "detail": "0px"
+    },
+    {
+      "name": "mobile-390 older narrative superseded and locked",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "axe mobile-390 narrative",
+      "ok": true,
+      "detail": "24 rules passed"
+    },
+    {
+      "name": "axe mobile-390 evaluation",
+      "ok": true,
+      "detail": "25 rules passed"
+    },
+    {
+      "name": "mobile-390 no page or console errors",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "keyboard: first Tab reaches skip link",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "keyboard: tabs and sample buttons reachable",
+      "ok": true,
+      "detail": "1. Import → 2. Stage gates → 3. Reconcile → 4. Board narrative → 5. Evaluation → About → Clean sample (13 rows) → Hostile sample → Malformed sample →  →  → Preview import"
+    },
+    {
+      "name": "keyboard: dialog focus moves inside",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "keyboard: visible focus ring",
+      "ok": true,
+      "detail": "solid"
+    },
+    {
+      "name": "keyboard: commit by Enter",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "two tabs: stale tab told to reload, nothing changed",
+      "ok": true,
+      "detail": "This view is based on revision 1; the workspace is now at revision 2. Reload before acting. The view has been reloaded a"
+    }
+  ]
+}
