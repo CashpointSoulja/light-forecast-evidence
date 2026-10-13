@@ -55,10 +55,13 @@ async function load() {
   render();
 }
 
+let currentTab = null;
 function route() {
   const tab = (location.hash || "#import").slice(1);
   const valid = ["import", "gates", "reconcile", "narrative", "evaluation", "about"];
   const t = valid.includes(tab) ? tab : "import";
+  if (t !== currentTab) clearNotice();
+  currentTab = t;
   document.querySelectorAll("[data-view]").forEach((s) => { s.hidden = s.dataset.view !== t; });
   document.querySelectorAll(".tabs a").forEach((a) => { if (a.dataset.tab === t) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
 }
@@ -178,7 +181,7 @@ function oppCard(v) {
 let evTarget = null, evKey = null;
 function openEvidence(v) {
   evTarget = v; evKey = crypto.randomUUID();
-  $("#evidence-for").textContent = `${v.opp_id} · ${v.account} (synthetic)`;
+  $("#evidence-for").textContent = `${v.opp_id} · ${v.account}`;
   const sel = $("#ev-field");
   const firstMissing = v.missing[0] ? (REQ_FIELD[v.missing[0].key] || v.missing[0].key) : "metrics";
   fill(sel, Object.entries(FIELD).map(([k, l]) => h("option", { value: k, selected: k === firstMissing }, l)));
@@ -291,7 +294,7 @@ function renderEval() {
     h("p", { class: "help", text: e.note }),
     h("div", { class: "tablewrap", tabindex: "0", role: "region", "aria-label": "Table (scrolls sideways on small screens)" }, h("table", { class: "stack" },
       h("thead", {}, h("tr", {}, h("th", { text: "Case" }), h("th", { text: "Check" }), h("th", { text: "Expected" }), h("th", { text: "Actual" }), h("th", { text: "Result" }))),
-      h("tbody", {}, e.cases.map((c) => h("tr", {}, h("td", { "data-label": "Case", class: "ref", text: c.id }), h("td", { "data-label": "Check", text: c.description }), h("td", { "data-label": "Expected", class: "ref", text: c.expected }), h("td", { "data-label": "Actual", class: "ref", text: c.actual }), h("td", { "data-label": "Result" }, chip(c.pass ? "pass" : "fail", c.pass ? "Pass" : "Fail"))))),
+      h("tbody", {}, e.cases.map((c) => h("tr", {}, h("td", { "data-label": "Case", class: "ref nowrap", text: c.id }), h("td", { "data-label": "Check", text: c.description }), h("td", { "data-label": "Expected", class: "ref", text: c.expected }), h("td", { "data-label": "Actual", class: "ref", text: c.actual }), h("td", { "data-label": "Result" }, chip(c.pass ? "pass" : "fail", c.pass ? "Pass" : "Fail"))))),
     )),
   );
 }

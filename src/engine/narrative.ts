@@ -32,7 +32,7 @@ function actionFor(v: OppView): { action: string; why: string } | null {
     next_step_fresh: "Set a dated next step with the buyer",
     close_date_current: "Re-date the close (current date has passed)",
   };
-  return { action: map[m.key] ?? `Resolve: ${m.label}`, why: `${m.label}: ${m.detail}.${v.missing.length > 1 ? ` ${v.missing.length - 1} more gap(s).` : ""}` };
+  return { action: map[m.key] ?? `Resolve: ${m.label}`, why: `${m.label}: ${m.detail.replace(/\.$/, "")}.${v.missing.length > 1 ? ` ${v.missing.length - 1} more gap(s).` : ""}` };
 }
 
 /** Built only from the snapshot passed in. Nothing from older revisions or outside the import is read. */

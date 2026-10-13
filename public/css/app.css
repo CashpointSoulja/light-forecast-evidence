@@ -117,3 +117,4 @@ dialog h2 { font-size: 24px; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .mt6 { margin-top: 6px; } .mt12 { margin-top: 12px; } .mt16 { margin-top: 16px; } .mb16 { margin-bottom: 16px; }
 .blocking { margin: 10px 0 0; font-size: 14px; }
+.nowrap { white-space: nowrap; }
