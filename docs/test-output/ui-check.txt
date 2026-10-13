@@ -1,0 +1,40 @@
+PASS  desktop-1366 hostile file commit disabled
+PASS  desktop-1366 markup rendered as text
+PASS  axe desktop-1366 import: 27 rules passed
+PASS  desktop-1366 commit dialog modal
+PASS  desktop-1366 Escape closes dialog without commit
+PASS  desktop-1366 focus returns to commit button
+PASS  desktop-1366 commit creates revision 1
+PASS  desktop-1366 evidence without ref refused in dialog
+PASS  desktop-1366 evidence saved as revision 2
+PASS  axe desktop-1366 gates: 21 rules passed
+PASS  axe desktop-1366 reconcile: 23 rules passed
+PASS  desktop-1366 no horizontal overflow on reconcile: 0px
+PASS  desktop-1366 older narrative superseded and locked
+PASS  axe desktop-1366 narrative: 23 rules passed
+PASS  axe desktop-1366 evaluation: 24 rules passed
+PASS  desktop-1366 no page or console errors
+PASS  mobile-390 hostile file commit disabled
+PASS  mobile-390 markup rendered as text
+PASS  axe mobile-390 import: 28 rules passed
+PASS  mobile-390 commit dialog modal
+PASS  mobile-390 Escape closes dialog without commit
+PASS  mobile-390 focus returns to commit button
+PASS  mobile-390 commit creates revision 1
+PASS  mobile-390 evidence without ref refused in dialog
+PASS  mobile-390 evidence saved as revision 2
+PASS  axe mobile-390 gates: 22 rules passed
+PASS  axe mobile-390 reconcile: 24 rules passed
+PASS  mobile-390 no horizontal overflow on reconcile: 0px
+PASS  mobile-390 older narrative superseded and locked
+PASS  axe mobile-390 narrative: 24 rules passed
+PASS  axe mobile-390 evaluation: 25 rules passed
+PASS  mobile-390 no page or console errors
+PASS  keyboard: first Tab reaches skip link
+PASS  keyboard: tabs and sample buttons reachable: 1. Import → 2. Stage gates → 3. Reconcile → 4. Board narrative → 5. Evaluation → About → Clean sample (13 rows) → Hostile sample → Malformed sample →  →  → Preview import
+PASS  keyboard: dialog focus moves inside
+PASS  keyboard: visible focus ring: solid
+PASS  keyboard: commit by Enter
+PASS  two tabs: stale tab told to reload, nothing changed: This view is based on revision 1; the workspace is now at revision 2. Reload before acting. The view has been reloaded a
+
+38/38 UI checks passed

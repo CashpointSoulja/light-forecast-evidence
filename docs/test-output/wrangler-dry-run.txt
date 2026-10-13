@@ -1,0 +1,9 @@
+ ⛅️ wrangler 4.150.0
+────────────────────
+✨ Read 24 files from the assets directory ./public
+Total Upload: 63.05 KiB / gzip: 18.47 KiB
+Your Worker has access to the following bindings:
+Binding                        Resource            
+env.WORKSPACE (Workspace)      Durable Object      
+env.ASSETS                     Assets              
+--dry-run: exiting now.

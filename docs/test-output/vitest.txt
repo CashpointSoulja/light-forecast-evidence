@@ -1,0 +1,81 @@
+
+ RUN  v3.2.7 .
+
+ ✓ test/api.test.ts > API happy path > preview saves nothing; commit creates one revision 51ms
+ ✓ test/api.test.ts > API happy path > serves security headers and an HttpOnly visitor cookie 19ms
+ ✓ test/api.test.ts > API rejected inputs > a file with any rejected row has no preview id and cannot be committed 22ms
+ ✓ test/api.test.ts > API rejected inputs > refuses non-JSON, cross-origin, missing keys and bad JSON 26ms
+ ✓ test/engine.test.ts > happy path > imports the clean fixture with exact source references 12ms
+ ✓ test/engine.test.ts > happy path > evaluation suite passes as designed 5ms
+ ✓ test/engine.test.ts > happy path > broken rule turns the suite red on the cases it should 3ms
+ ✓ test/engine.test.ts > rejected inputs > file error: missing as_of 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: unclosed quote 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: missing column 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: extra column 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: no rows 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: non-GBP reporting 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: duplicate fx 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: zero fx 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: impossible as_of 0ms
+ ✓ test/engine.test.ts > rejected inputs > file error: unknown directive 0ms
+ ✓ test/engine.test.ts > rejected inputs > rejects oversize and over-row files 3ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: amount with separator 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: three decimals 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: negative amount 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: lowercase currency 1ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: bad stage 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: bad rep category 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: impossible close date 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: future activity 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: future EB engagement 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: closed won in the future 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: discount over 100 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: free-text pricing approval 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: lowercase id 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: blank owner 0ms
+ ✓ test/engine.test.ts > rejected inputs > rejects both rows of a duplicate id and holds the whole file 0ms
+ ✓ test/engine.test.ts > rejected inputs > parses quoted cells with commas, doubled quotes and newlines 0ms
+ ✓ test/engine.test.ts > rejected inputs > compares dates as calendar days, not strings 0ms
+ ✓ test/engine.test.ts > hostile content > rejects formula, bidi and control characters but keeps markup as inert text 1ms
+ ✓ test/engine.test.ts > hostile content > prompt-like notes cannot change classification 0ms
+ ✓ test/engine.test.ts > hostile content > escapes Markdown in exported narratives 1ms
+ ✓ test/engine.test.ts > evidence gates and staleness > a fully evidenced negotiation deal is commit 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > claimed field without ref blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > unknown field blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > EB engagement 31 days old blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > EB engagement without ref blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > discount unknown blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > discount above threshold, no approval blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > approval pending at negotiation blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > next step date passed blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > last activity 22 days ago blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > no next step blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > close date passed blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > EB engagement exactly 30 days old is still fresh 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > stale next step is flagged below negotiation without blocking 1ms
+ ✓ test/engine.test.ts > evidence gates and staleness > evidenced stage is the highest contiguous passing gate 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > closed won without a contract ref is unverified and excluded 0ms
+ ✓ test/engine.test.ts > reconciliation > never converts a currency without an imported rate 1ms
+ ✓ test/engine.test.ts > reconciliation > uses exact integer money with half-up rounding 1ms
+ ✓ test/engine.test.ts > reconciliation > category totals always reconcile to gross pipeline 1ms
+ ✓ test/engine.test.ts > narrative from current state only > is stamped with its revision and marked superseded in exports from a later one 2ms
+ ✓ test/engine.test.ts > narrative from current state only > names the owner on every action and only for deals in the snapshot 2ms
+ ✓ test/engine.test.ts > narrative from current state only > does not state time saved or forecast lift 2ms
+ ✓ test/engine.test.ts > narrative from current state only > a single opportunity view does not depend on other rows 2ms
+ ✓ test/api.test.ts > API rejected inputs > refuses evidence without a source reference or with a formula 41ms
+ ✓ test/api.test.ts > revisions, staleness and narratives > a new revision supersedes older narratives, which cannot be marked board-ready 54ms
+ ✓ test/api.test.ts > concurrent actions > two tabs committing against the same revision: exactly one wins, the other gets 409 40ms
+ ✓ test/api.test.ts > concurrent actions > ten parallel evidence edits against one revision produce one new revision 49ms
+ ✓ test/api.test.ts > concurrent actions > idempotent replay returns the original result; reusing a key for another body is refused 40ms
+ ✓ test/api.test.ts > visitor isolation > one visitor's import is invisible to another, and a forged cookie gets a fresh workspace 41ms
+ ✓ test/api.test.ts > visitor isolation > reset clears only the caller's workspace 53ms
+ ✓ test/api.test.ts > recovery and bounds > restoring an older revision creates a new revision with the old contents 37ms
+ ✓ test/api.test.ts > recovery and bounds > a retry after a lost response does not double-apply 37ms
+ ✓ test/api.test.ts > recovery and bounds > a failed command leaves state untouched 59ms
+ ✓ test/api.test.ts > recovery and bounds > keeps at most 30 revisions and 20 narratives 361ms
+
+ Test Files  2 passed (2)
+      Tests  72 passed (72)
+   Start at  15:49:04
+   Duration  1.18s (transform 119ms, setup 0ms, collect 150ms, tests 980ms, environment 0ms, prepare 88ms)
+

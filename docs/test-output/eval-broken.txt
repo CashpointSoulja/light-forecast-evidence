@@ -1,0 +1,42 @@
+Forecast Evidence Workbench evaluation (synthetic fixtures) with deliberately broken rule eb-named-counts-as-engaged
+PASS  IMP-1          Clean synthetic file is committable with 13 valid rows
+PASS  IMP-2          Every row carries an exact source reference
+PASS  CLS-SYN-1001   SYN-1001 category / evidenced stage
+FAIL  CLS-SYN-1002   SYN-1002 category / evidenced stage
+      expected not_classifiable / proposal
+      actual   commit / negotiation
+PASS  CLS-SYN-1003   SYN-1003 category / evidenced stage
+PASS  CLS-SYN-1004   SYN-1004 category / evidenced stage
+PASS  CLS-SYN-1005   SYN-1005 category / evidenced stage
+PASS  CLS-SYN-1006   SYN-1006 category / evidenced stage
+PASS  CLS-SYN-1007   SYN-1007 category / evidenced stage
+PASS  CLS-SYN-1008   SYN-1008 category / evidenced stage
+PASS  CLS-SYN-1009   SYN-1009 category / evidenced stage
+PASS  CLS-SYN-1010   SYN-1010 category / evidenced stage
+PASS  CLS-SYN-1011   SYN-1011 category / evidenced stage
+PASS  CLS-SYN-1012   SYN-1012 category / evidenced stage
+PASS  CLS-SYN-1013   SYN-1013 category / evidenced stage
+PASS  REC-1          Gross open pipeline (GBP minor units)
+PASS  REC-2          Gross pipeline denominator
+PASS  REC-3          Weighted forecast on reported stages
+FAIL  REC-4          Weighted forecast on evidenced stages
+      expected 30429000
+      actual   31977000
+PASS  REC-5          Closed won excludes the unverified row
+FAIL  REC-6          Evidence-backed commit total
+      expected 12000000
+      actual   19740000
+PASS  REC-7          CHF without a rate is excluded and counted
+PASS  REC-8          Category totals sum to gross pipeline
+PASS  NAR-1          Narrative is stamped with the revision it was built from
+PASS  NAR-2          Every named action points at an opportunity in the current snapshot
+PASS  NAR-3          No action for the clean commit deal SYN-1001
+PASS  NAR-4          Narrative never states time saved or lift
+PASS  HOS-1          Hostile file is not committable
+PASS  HOS-2          Rejected lines
+PASS  HOS-3          Markup and prompt-like text pass as inert text on line 4
+PASS  HOS-4          Malformed file fails before row checks
+
+28/31 passed. Classification agreement 12/13 (92%). Coverage 6/10 open deals classifiable (60%).
+Accuracy is agreement with hand-written labels on 13 synthetic rows. It says nothing about real forecast accuracy.
+exit 1
