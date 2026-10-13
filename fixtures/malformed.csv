@@ -1,0 +1,3 @@
+#source,synthetic-malformed.csv
+opp_id,account,owner,stage,rep_category,amount,currency,close_date,next_step,next_step_date,last_activity_date,metrics,economic_buyer,decision_criteria,decision_process,identify_pain,champion,eb_engaged_date,discount_pct,pricing_approval,contract_ref,notes
+SYN-3001,"Unclosed quote (synthetic),Priya Nair,discovery,pipeline,1000,GBP,2026-12-01,,,,,,,,,,,,,,

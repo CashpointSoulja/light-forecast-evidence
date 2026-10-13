@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forecast Evidence Workbench: independent concept by Ayo Ahmed</title>
+<meta name="description" content="Independent concept by Ayo Ahmed. Synthetic data only. Not affiliated with Light.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/app.js" type="module"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="strip" role="note">Synthetic data only. No CRM, ERP, email or finance system is connected. Independent concept by Ayo Ahmed, not affiliated with or endorsed by Light.</div>
+<header class="top">
+  <div class="brandline">
+    <div>
+      <p class="eyebrow">Independent concept by Ayo Ahmed</p>
+      <h1>Forecast Evidence Workbench</h1>
+    </div>
+    <div class="context">
+      <span>Designed around the public AI &amp; Revenue Operations Lead role at</span>
+      <img src="brand/light-logo-wordmark-black-artwork.svg" alt="Light" width="58" height="20">
+    </div>
+  </div>
+  <div class="statusbar">
+    <span class="rev" id="rev" aria-live="polite">Revision 0</span>
+    <span class="asof" id="asof">No import yet</span>
+  </div>
+  <nav class="tabs" aria-label="Workbench sections">
+    <a href="#import" data-tab="import">1. Import</a>
+    <a href="#gates" data-tab="gates">2. Stage gates</a>
+    <a href="#reconcile" data-tab="reconcile">3. Reconcile</a>
+    <a href="#narrative" data-tab="narrative">4. Board narrative</a>
+    <a href="#evaluation" data-tab="evaluation">5. Evaluation</a>
+    <a href="#about" data-tab="about">About</a>
+  </nav>
+</header>
+<div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+<main id="main" tabindex="-1">
+  <section id="view-import" data-view="import" aria-labelledby="h-import">
+    <h2 id="h-import">Import synthetic opportunities</h2>
+    <p class="lede">One file, one preview, one commit. Every row keeps an exact source reference. If any row is rejected, nothing is saved.</p>
+    <div class="grid2">
+      <div class="panel">
+        <h3>Choose a synthetic file</h3>
+        <div class="row gap">
+          <button type="button" class="btn ghost" data-sample="pipeline-q4">Clean sample (13 rows)</button>
+          <button type="button" class="btn ghost" data-sample="hostile">Hostile sample</button>
+          <button type="button" class="btn ghost" data-sample="malformed">Malformed sample</button>
+        </div>
+        <label for="file">Or upload a CSV (max 256 KB, 300 rows)</label>
+        <input id="file" type="file" accept=".csv,text/csv">
+        <label for="csv">CSV text</label>
+        <textarea id="csv" rows="9" spellcheck="false" aria-describedby="csv-help"></textarea>
+        <p id="csv-help" class="help">Needs <code>#as_of,YYYY-MM-DD</code>. Evidence cells need a <code>[ref:SYN-…]</code> tag or they count as claimed. FX lines look like <code>#fx,EUR,0.86</code> (GBP per unit).</p>
+        <button type="button" class="btn primary" id="preview-btn">Preview import</button>
+      </div>
+      <div class="panel" id="preview" aria-live="polite">
+        <h3>Preview</h3>
+        <p class="muted">No preview yet. Nothing has been saved.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-gates" data-view="gates" aria-labelledby="h-gates" hidden>
+    <h2 id="h-gates">Evidence-based stage gates</h2>
+    <p class="lede">A deal is classified only when every requirement for its reported stage has evidence with a source reference. Unknown stays unknown.</p>
+    <div id="gates"></div>
+  </section>
+
+  <section id="view-reconcile" data-view="reconcile" aria-labelledby="h-reconcile" hidden>
+    <h2 id="h-reconcile">Reconcile</h2>
+    <p class="lede">Every total shows what it counts, what it excludes and why.</p>
+    <div id="reconcile"></div>
+  </section>
+
+  <section id="view-narrative" data-view="narrative" aria-labelledby="h-narrative" hidden>
+    <h2 id="h-narrative">Board narrative</h2>
+    <p class="lede">Built from the current revision only. Any new revision supersedes older narratives, and a superseded narrative cannot be marked board-ready.</p>
+    <div id="narrative"></div>
+  </section>
+
+  <section id="view-evaluation" data-view="evaluation" aria-labelledby="h-evaluation" hidden>
+    <h2 id="h-evaluation">Evaluation</h2>
+    <p class="lede">Expected values were written by hand from the synthetic fixture and the rules. Run them as-is, or with one deliberately broken rule to see the suite turn red.</p>
+    <div class="row gap">
+      <button type="button" class="btn primary" id="eval-btn">Run evaluation</button>
+      <button type="button" class="btn ghost" id="eval-broken-btn">Run with broken rule</button>
+    </div>
+    <div id="evaluation" aria-live="polite"></div>
+    <div class="panel" id="adoption">
+      <h3>Adoption hypothesis (not a result)</h3>
+      <p>If forecast calls show the evidence gap next to the number, I expect managers to ask for the missing evidence before the call rather than during it. This is untested.</p>
+      <ul>
+        <li><strong>Baseline:</strong> unknown. I have no data on how forecast calls run today, so there is no time-saved or accuracy-lift figure here.</li>
+        <li><strong>Leading measure:</strong> share of open deals classifiable, with the count of open deals as the denominator.</li>
+        <li><strong>Usage measure:</strong> weekly reviews where a narrative was generated from the current revision, out of weekly reviews held.</li>
+        <li><strong>Guardrail:</strong> rep calls ahead of evidence, out of open deals with a rep call. It should fall, not be hidden.</li>
+        <li><strong>Kill criterion:</strong> after a four-week pilot, if managers still rebuild the number in a spreadsheet for most reviews, the tool is not earning its place.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="view-about" data-view="about" aria-labelledby="h-about" hidden>
+    <h2 id="h-about">About this concept</h2>
+    <div class="panel prose">
+      <p>I'm Ayo Ahmed. I built this as an independent concept around the public AI &amp; Revenue Operations Lead role at Light. It is not a Light product. I have no affiliation with Light and no access to its systems, customers or data.</p>
+      <p>The Light name and logo appear only as context for which public role this responds to. They belong to Light and are used here without endorsement.</p>
+      <p>Everything in the workbench is synthetic: companies, people, amounts, references and FX rates. Nothing reads from or writes to a CRM, ERP, email or finance system. Each browser gets its own isolated workspace, stored in a SQLite-backed Durable Object.</p>
+      <p>The PRD, research, rules, test results and caveats are in the <code>docs/</code> folder of the public repository.</p>
+      <h3>Workspace</h3>
+      <p>Bounds per visitor: <span id="bounds"></span>.</p>
+      <div id="history"></div>
+      <button type="button" class="btn ghost danger" id="reset-btn">Clear my workspace</button>
+    </div>
+  </section>
+</main>
+<footer class="foot">
+  <p>Forecast Evidence Workbench. Independent concept by Ayo Ahmed. Synthetic data. Not affiliated with or endorsed by Light; the Light name and logo belong to Light.</p>
+</footer>
+
+<dialog id="commit-dialog" aria-labelledby="commit-title">
+  <form method="dialog">
+    <h2 id="commit-title">Commit this import?</h2>
+    <div id="commit-body"></div>
+    <p class="help">This replaces the workspace contents as one new revision. Older board narratives become superseded.</p>
+    <div class="row gap end">
+      <button value="cancel" class="btn ghost">Cancel</button>
+      <button value="confirm" class="btn primary" id="commit-confirm">Commit as one revision</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="evidence-dialog" aria-labelledby="evidence-title">
+  <form method="dialog" id="evidence-form">
+    <h2 id="evidence-title">Add evidence</h2>
+    <p id="evidence-for" class="muted"></p>
+    <label for="ev-field">Requirement</label>
+    <select id="ev-field"></select>
+    <div id="ev-text-wrap">
+      <label for="ev-text">Evidence</label>
+      <input id="ev-text" type="text" maxlength="400" autocomplete="off">
+    </div>
+    <div id="ev-date-wrap">
+      <label for="ev-date">Date</label>
+      <input id="ev-date" type="date">
+    </div>
+    <label for="ev-ref">Synthetic source reference</label>
+    <input id="ev-ref" type="text" placeholder="SYN-ABC123" autocomplete="off" aria-describedby="ev-ref-help">
+    <p id="ev-ref-help" class="help">Required. Evidence without a reference is not accepted. This creates a new revision.</p>
+    <p id="ev-error" class="error" role="alert" hidden></p>
+    <div class="row gap end">
+      <button value="cancel" class="btn ghost" formnovalidate>Cancel</button>
+      <button value="save" class="btn primary" id="ev-save">Save as new revision</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="reset-dialog" aria-labelledby="reset-title">
+  <form method="dialog">
+    <h2 id="reset-title">Clear this workspace?</h2>
+    <p>This deletes every revision, preview and narrative for this browser only. Other visitors are unaffected.</p>
+    <div class="row gap end">
+      <button value="cancel" class="btn ghost">Keep workspace</button>
+      <button value="confirm" class="btn primary">Clear workspace</button>
+    </div>
+  </form>
+</dialog>
+</body>
+</html>
