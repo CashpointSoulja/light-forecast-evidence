@@ -3,7 +3,7 @@
 I published and independently checked this concept on 13 October 2026. All people, numbers and scenarios are synthetic. It is an independent portfolio concept, not an affiliated product or production service.
 
 - Live demo: https://light-forecast-evidence.ayoahmed-49d.workers.dev
-- Voiced public walkthrough: https://drive.google.com/file/d/1M5aUFwOwfDfJ3R3YPhmxIrunTlc9NVKR/view?usp=drivesdk&authuser=ayomideahmedcp%40gmail.com
+- Voiced public walkthrough: https://drive.google.com/file/d/1M5aUFwOwfDfJ3R3YPhmxIrunTlc9NVKR/view
 - The video is a 100.6-second recording of the real public demo, not a mockup. It has pointer movement, narration and captions.
 - Video access: anyone with the link can view, verified after upload.
 - Reviewed code commit: `a74bfd039dd1576e69d59915074387b4318ef38b`

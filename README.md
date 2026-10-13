@@ -6,7 +6,7 @@ A forecast deal is only called confident when the evidence for its stage is reco
 
 ## Live release
 - Live demo: https://light-forecast-evidence.ayoahmed-49d.workers.dev
-- Voiced public walkthrough: https://drive.google.com/file/d/1M5aUFwOwfDfJ3R3YPhmxIrunTlc9NVKR/view?usp=drivesdk&authuser=ayomideahmedcp%40gmail.com
+- Voiced public walkthrough: https://drive.google.com/file/d/1M5aUFwOwfDfJ3R3YPhmxIrunTlc9NVKR/view
 - Release record: [docs/LIVE_RELEASE.md](docs/LIVE_RELEASE.md)
 
 ![Stage gates at 1366px](docs/screenshots/desktop-1366-gates.png)
