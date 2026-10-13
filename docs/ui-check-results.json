@@ -190,6 +190,31 @@
       "name": "two tabs: stale tab told to reload, nothing changed",
       "ok": true,
       "detail": "This view is based on revision 1; the workspace is now at revision 2. Reload before acting. The view has been reloaded a"
+    },
+    {
+      "name": "reset dialog modal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "reset: empty workspace shown at revision 2",
+      "ok": true,
+      "detail": "Empty workspace (cleared) · no import yet | Workspace cleared for this browser as revision 2. Older tabs and retries cannot "
+    },
+    {
+      "name": "reset: history marks the empty revision and offers no restore",
+      "ok": true,
+      "detail": "Revision historyRevision 2 (reset): Workspace cleared (current, empty)"
+    },
+    {
+      "name": "reset: reimport continues at revision 3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "reset: stale tab's reset refused, newer import kept",
+      "ok": true,
+      "detail": "This view is based on revision 1; the workspace is now at revision 3. Reload before acting. The view | revision 3"
     }
   ]
 }

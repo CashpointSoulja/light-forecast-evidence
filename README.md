@@ -34,7 +34,7 @@ BASE=http://127.0.0.1:8787 CHROME=/path/to/chrome node scripts/ui-check.mjs
 ```
 
 ## Results
-72/72 tests, 31/31 evaluation cases, broken rule 28/31 (red as intended), 38/38 browser checks. See [docs/pm/test-results.md](docs/pm/test-results.md) and the raw output in [docs/test-output/](docs/test-output/).
+79/79 tests, 31/31 evaluation cases, broken rule 28/31 (red as intended), 43/43 browser checks, on the `audit-fix` branch. See [docs/pm/test-results.md](docs/pm/test-results.md) and the raw output in [docs/test-output/](docs/test-output/).
 
 ## Documents
 - [design.md](design.md) and the [visual guide](docs/visual-guide.html), committed before any app code

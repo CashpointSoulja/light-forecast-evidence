@@ -69,7 +69,7 @@ function route() {
 function render() {
   if (!state) return;
   $("#rev").textContent = `Revision ${state.revision}`;
-  $("#asof").textContent = state.snapshot ? `As of ${state.snapshot.as_of} · ${state.snapshot.count} synthetic opportunities · ${state.snapshot.source_name}` : "No import yet";
+  $("#asof").textContent = state.snapshot ? `As of ${state.snapshot.as_of} · ${state.snapshot.count} synthetic opportunities · ${state.snapshot.source_name}` : (state.revision > 0 ? "Empty workspace (cleared) · no import yet" : "No import yet");
   renderGates(); renderReconcile(); renderNarratives(); renderAbout();
 }
 
@@ -305,6 +305,7 @@ function renderAbout() {
   $("#bounds").textContent = `${b.maxRows} rows and ${Math.round(b.maxBytes / 1024)} KB per file, ${b.previews} open previews, ${b.revisions} revisions, ${b.narratives} narratives, ${b.commands} remembered command keys`;
   fill($("#history"), h("h3", { text: "Revision history" }),
     state.revisions.length ? h("ul", {}, state.revisions.map((r) => h("li", {}, `Revision ${r.rev} (${r.kind}): ${r.summary} `,
+      r.kind === "reset" ? h("span", { class: "muted", text: r.rev === state.revision ? "(current, empty)" : "(empty)" }) :
       r.rev !== state.revision ? h("button", { type: "button", class: "btn ghost small", onclick: () => restore(r.rev) }, `Restore revision ${r.rev}`) : h("span", { class: "muted", text: "(current)" })))) : h("p", { class: "muted", text: "No revisions." }));
 }
 async function restore(rev) {
@@ -332,7 +333,8 @@ $("#reset-btn").addEventListener("click", () => { $("#reset-dialog").returnValue
 $("#reset-dialog").addEventListener("close", async () => {
   if ($("#reset-dialog").returnValue !== "confirm") return;
   const r = await command("/api/reset", { confirm: "RESET" });
-  if (r.status === 200) { preview = null; await load(); notice("Workspace cleared for this browser.", true); location.hash = "#import"; }
+  if (r.status === 200) { preview = null; await load(); notice(`Workspace cleared for this browser as revision ${r.body.revision}. Older tabs and retries cannot act on the cleared data.`, true); location.hash = "#import"; }
+  else if (r.status !== 409) notice(r.body.message);
 });
 window.addEventListener("hashchange", () => { route(); $("#main").focus({ preventScroll: true }); });
 window.addEventListener("focus", () => load());

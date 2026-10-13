@@ -36,5 +36,11 @@ PASS  keyboard: dialog focus moves inside
 PASS  keyboard: visible focus ring: solid
 PASS  keyboard: commit by Enter
 PASS  two tabs: stale tab told to reload, nothing changed: This view is based on revision 1; the workspace is now at revision 2. Reload before acting. The view has been reloaded a
+PASS  reset dialog modal
+PASS  reset: empty workspace shown at revision 2: Empty workspace (cleared) · no import yet | Workspace cleared for this browser as revision 2. Older tabs and retries cannot 
+PASS  reset: history marks the empty revision and offers no restore: Revision historyRevision 2 (reset): Workspace cleared (current, empty)
+PASS  reset: reimport continues at revision 3
+PASS  reset: stale tab's reset refused, newer import kept: This view is based on revision 1; the workspace is now at revision 3. Reload before acting. The view | revision 3
 
-38/38 UI checks passed
+43/43 UI checks passed
+exit 0

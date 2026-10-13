@@ -1,4 +1,6 @@
 import { Workspace } from "./workspace";
+import { HttpError } from "./errors";
+import { readBodyLimited } from "./body";
 export { Workspace };
 
 interface Env { WORKSPACE: DurableObjectNamespace<Workspace>; ASSETS: Fetcher }
@@ -30,14 +32,24 @@ export default {
       if (!ct.toLowerCase().startsWith("application/json")) return err(415, "json_required", "POST bodies must be application/json.");
       const origin = req.headers.get("origin");
       if (origin && origin !== url.origin) return err(403, "cross_origin", "Cross-origin commands are refused.");
-      const len = Number(req.headers.get("content-length") ?? "0");
-      if (len > 600_000) return err(413, "too_large", "Request body too large.");
     } else if (req.method !== "GET") {
       return err(405, "method_not_allowed", "Only GET and POST are supported.");
     }
+    let forward: Request = req;
+    if (req.method === "POST") {
+      try {
+        const bytes = await readBodyLimited(req);
+        const headers = new Headers(req.headers);
+        headers.set("content-length", String(bytes.byteLength));
+        forward = new Request(req.url, { method: "POST", headers, body: bytes });
+      } catch (e) {
+        if (e instanceof HttpError) return err(e.status, e.code, e.message);
+        throw e;
+      }
+    }
     const v = visitorId(req);
     const stub = env.WORKSPACE.get(env.WORKSPACE.idFromName(v.id));
-    const res = await stub.fetch(req);
+    const res = await stub.fetch(forward);
     const out = new Response(res.body, res);
     for (const [k, val] of Object.entries(SECURITY_HEADERS)) out.headers.set(k, val);
     if (v.fresh) out.headers.append("set-cookie", `lfe_vid=${v.id}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000`);

@@ -1,0 +1,35 @@
+# The new reset-safety and body-limit tests run against the pre-fix code (main at b288359), to show they catch the audited bug.
+# Command: npx vitest run test/api.test.ts (audit-fix test file copied into a worktree of main)
+
+   ✓ API happy path > preview saves nothing; commit creates one revision 65ms
+   ✓ API happy path > serves security headers and an HttpOnly visitor cookie 20ms
+   ✓ API rejected inputs > a file with any rejected row has no preview id and cannot be committed 21ms
+   ✓ API rejected inputs > refuses non-JSON, cross-origin, missing keys and bad JSON 27ms
+   ✓ API rejected inputs > refuses evidence without a source reference or with a formula 52ms
+   ✓ revisions, staleness and narratives > a new revision supersedes older narratives, which cannot be marked board-ready 66ms
+   ✓ concurrent actions > two tabs committing against the same revision: exactly one wins, the other gets 409 34ms
+   ✓ concurrent actions > ten parallel evidence edits against one revision produce one new revision 51ms
+   ✓ concurrent actions > idempotent replay returns the original result; reusing a key for another body is refused 33ms
+   ✓ visitor isolation > one visitor's import is invisible to another, and a forged cookie gets a fresh workspace 36ms
+   × visitor isolation > reset clears only the caller's workspace 46ms
+     → expected { revision: +0 } to deeply equal { Object (revision, epoch, ...) }
+   ✓ recovery and bounds > restoring an older revision creates a new revision with the old contents 34ms
+   ✓ recovery and bounds > a retry after a lost response does not double-apply 39ms
+   ✓ recovery and bounds > a failed command leaves state untouched 34ms
+   ✓ recovery and bounds > keeps at most 30 revisions and 20 narratives  351ms
+   × reset safety > reset needs the current expected_revision, so a stale tab cannot erase newer work 30ms
+     → expected [ 200, undefined ] to deeply equal [ 400, 'expected_revision_required' ]
+   × reset safety > revision numbers keep rising across resets and are never reused 68ms
+     → expected [ 1, +0, 1, +0, 1, +0 ] to deeply equal [ 1, 2, 3, 4, 5, 6 ]
+   × reset safety > stale pre-reset imports, evidence, board-ready and restores cannot act after a reset and reimport 42ms
+     → expected undefined to be 3 // Object.is equality
+   × reset safety > a receipt from before a reset cannot claim a mutation in the new workspace 33ms
+     → expected { revision: +0 } to deeply equal { Object (revision, epoch, ...) }
+   × request body limits > counts UTF-8 bytes, not characters, while streaming without a content-length 33ms
+     → expected [ 200, undefined ] to deeply equal [ 413, 'too_large' ]
+   × request body limits > rejects invalid UTF-8 and accepts valid multibyte text 14ms
+     → expected [ 200, undefined ] to deeply equal [ 400, 'bad_encoding' ]
+   ✓ request body limits > refuses a declared oversize body and a stream far beyond the limit 39ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  7 failed | 15 passed (22)

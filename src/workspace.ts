@@ -6,15 +6,14 @@ import {
 import { sha256Hex } from "./engine/hash";
 import { FIXTURES } from "./generated/fixtures";
 import { runEval } from "./eval/cases";
+import { HttpError } from "./errors";
+import { decodeUtf8, readBodyLimited } from "./body";
+export { HttpError };
 
 export const BOUNDS = { previews: 5, revisions: 30, narratives: 20, commands: 200, events: 60 } as const;
 const IDEM_RE = /^[A-Za-z0-9_-]{8,80}$/;
 const REF_RE = /^SYN-[A-Z0-9-]{2,40}$/;
 const EDITABLE = [...MEDDIC_FIELDS, "eb_engaged_date", "pricing_approval", "contract_ref", "next_step"] as const;
-
-export class HttpError extends Error {
-  constructor(public status: number, public code: string, message: string, public extra: Record<string, unknown> = {}) { super(message); }
-}
 
 const json = (status: number, body: unknown, headers: Record<string, string> = {}) =>
   new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json; charset=utf-8", ...headers } });
@@ -34,6 +33,8 @@ export class Workspace extends DurableObject {
       CREATE TABLE IF NOT EXISTS commands (key TEXT PRIMARY KEY, route TEXT NOT NULL, body_hash TEXT NOT NULL, status INTEGER NOT NULL, response TEXT NOT NULL, created_at TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, kind TEXT NOT NULL, detail TEXT NOT NULL);
     `);
+    const cols = this.sql.exec("PRAGMA table_info(commands)").toArray().map((c) => String(c.name));
+    if (!cols.includes("epoch")) this.sql.exec("ALTER TABLE commands ADD COLUMN epoch INTEGER NOT NULL DEFAULT 0");
   }
 
   revision(): number {
@@ -41,10 +42,20 @@ export class Workspace extends DurableObject {
     return r ? Number(r.v) : 0;
   }
 
+  /** Counts resets. Revision numbers never go back, and command receipts are tied to the epoch they were written in. */
+  epoch(): number {
+    const r = this.sql.exec("SELECT v FROM meta WHERE k = 'epoch'").toArray()[0];
+    return r ? Number(r.v) : 0;
+  }
+
+  setMeta(k: string, v: number) {
+    this.sql.exec("INSERT INTO meta (k, v) VALUES (?, ?) ON CONFLICT(k) DO UPDATE SET v = excluded.v", k, String(v));
+  }
+
   snapshot(rev = this.revision()): Snapshot | null {
     if (rev === 0) return null;
     const r = this.sql.exec("SELECT snapshot FROM revisions WHERE rev = ?", rev).toArray()[0];
-    return r ? (JSON.parse(String(r.snapshot)) as Snapshot) : null;
+    return r ? (JSON.parse(String(r.snapshot)) as Snapshot | null) : null;
   }
 
   event(kind: string, detail: string) {
@@ -57,7 +68,7 @@ export class Workspace extends DurableObject {
     const rev = this.revision() + 1;
     const snap: Snapshot = { ...s, revision: rev };
     this.sql.exec("INSERT INTO revisions (rev, created_at, kind, summary, snapshot) VALUES (?, ?, ?, ?, ?)", rev, now(), kind, summary, JSON.stringify(snap));
-    this.sql.exec("INSERT INTO meta (k, v) VALUES ('revision', ?) ON CONFLICT(k) DO UPDATE SET v = excluded.v", String(rev));
+    this.setMeta("revision", rev);
     this.sql.exec("DELETE FROM revisions WHERE rev <= ?", rev - BOUNDS.revisions);
     this.sql.exec("DELETE FROM previews WHERE base_revision < ?", rev);
     this.event(kind, `Revision ${rev}: ${summary}`);
@@ -100,8 +111,7 @@ export class Workspace extends DurableObject {
     }
     if (m !== "POST") throw new HttpError(404, "not_found", "No such route.");
 
-    const raw = await req.text();
-    if (raw.length > LIMITS.maxBytes * 2) throw new HttpError(413, "too_large", "Request body too large.");
+    const raw = decodeUtf8(await readBodyLimited(req));
     let body: Record<string, unknown>;
     try { body = JSON.parse(raw || "{}"); } catch { throw new HttpError(400, "bad_json", "Body is not valid JSON."); }
     if (!body || typeof body !== "object" || Array.isArray(body)) throw new HttpError(400, "bad_json", "Body must be a JSON object.");
@@ -112,9 +122,12 @@ export class Workspace extends DurableObject {
     if (!IDEM_RE.test(key)) throw new HttpError(400, "idempotency_key_required", "Idempotency-Key header (8-80 letters, digits, - or _) is required for commands.");
     const bodyHash = await sha256Hex(`${path}\n${raw}`);
     // From here on the handler is synchronous, so no other request can interleave between the revision check and the write.
-    const prior = this.sql.exec("SELECT route, body_hash, status, response FROM commands WHERE key = ?", key).toArray()[0];
+    const prior = this.sql.exec("SELECT route, body_hash, status, response, epoch FROM commands WHERE key = ?", key).toArray()[0];
     if (prior) {
       if (prior.body_hash !== bodyHash) throw new HttpError(422, "idempotency_key_reused", "This Idempotency-Key was already used for a different command.");
+      if (Number(prior.epoch) !== this.epoch()) {
+        throw new HttpError(409, "receipt_from_cleared_workspace", "This command was recorded before the workspace was cleared. Its result no longer describes this workspace, and it was not applied again.", { current_revision: this.revision() });
+      }
       return new Response(String(prior.response), { status: Number(prior.status), headers: { "content-type": "application/json; charset=utf-8", "idempotent-replay": "true" } });
     }
     let status = 200, result: unknown;
@@ -126,7 +139,7 @@ export class Workspace extends DurableObject {
     }
     const response = JSON.stringify(result);
     if (status !== 409) {
-      this.sql.exec("INSERT INTO commands (key, route, body_hash, status, response, created_at) VALUES (?, ?, ?, ?, ?, ?)", key, path, bodyHash, status, response, now());
+      this.sql.exec("INSERT INTO commands (key, route, body_hash, status, response, created_at, epoch) VALUES (?, ?, ?, ?, ?, ?, ?)", key, path, bodyHash, status, response, now(), this.epoch());
       this.sql.exec("DELETE FROM commands WHERE key NOT IN (SELECT key FROM commands ORDER BY created_at DESC, key LIMIT ?)", BOUNDS.commands);
     }
     return new Response(response, { status, headers: { "content-type": "application/json; charset=utf-8" } });
@@ -176,7 +189,7 @@ export class Workspace extends DurableObject {
     this.expectRevision(body.expected_revision);
     if (typeof body.preview_id !== "string") throw new HttpError(400, "preview_required", "preview_id is required.");
     const row = this.sql.exec("SELECT base_revision, data FROM previews WHERE id = ?", body.preview_id).toArray()[0];
-    if (!row) throw new HttpError(410, "preview_gone", "This preview expired or was superseded. Preview the file again.");
+    if (!row || Number(row.base_revision) !== this.revision()) throw new HttpError(410, "preview_gone", "This preview expired or was superseded. Preview the file again.");
     const p = JSON.parse(String(row.data)) as Awaited<ReturnType<typeof parseImport>>;
     const rev = this.writeRevision(
       { as_of: p.as_of!, source_name: p.source_name, fingerprint: p.fingerprint, fx: p.fx, opportunities: p.opportunities },
@@ -252,18 +265,27 @@ export class Workspace extends DurableObject {
   restore(rev: number, body: Record<string, unknown>) {
     this.expectRevision(body.expected_revision);
     const s = this.snapshot(rev);
-    if (!s) throw new HttpError(404, "not_found", `Revision ${rev} is not retained (the last ${BOUNDS.revisions} are kept).`);
+    if (!s) {
+      const kept = this.sql.exec("SELECT kind FROM revisions WHERE rev = ?", rev).toArray()[0];
+      if (kept) throw new HttpError(422, "empty_revision", `Revision ${rev} is an empty workspace after a reset; there is nothing to restore.`);
+      throw new HttpError(404, "not_found", `Revision ${rev} is not retained (the last ${BOUNDS.revisions} are kept).`);
+    }
     const { revision: _r, ...rest } = s;
     const n = this.writeRevision(rest, "restore", `Restored revision ${rev}`);
     return { revision: n, restored_from: rev };
   }
 
+  /** Clears data but never rewinds: the empty workspace becomes the next revision, and the epoch moves on. */
   reset(body: Record<string, unknown>) {
+    this.expectRevision(body.expected_revision);
     if (body.confirm !== "RESET") throw new HttpError(400, "confirm_required", 'Send {"confirm":"RESET"}.');
     for (const t of ["revisions", "previews", "narratives", "events"]) this.sql.exec(`DELETE FROM ${t}`);
-    this.sql.exec("DELETE FROM meta");
-    this.event("reset", "Workspace cleared");
-    return { revision: 0 };
+    const rev = this.revision() + 1, epoch = this.epoch() + 1;
+    this.sql.exec("INSERT INTO revisions (rev, created_at, kind, summary, snapshot) VALUES (?, ?, 'reset', 'Workspace cleared', 'null')", rev, now());
+    this.setMeta("revision", rev);
+    this.setMeta("epoch", epoch);
+    this.event("reset", `Revision ${rev}: workspace cleared`);
+    return { revision: rev, epoch, cleared: true };
   }
 
   state() {
@@ -275,6 +297,7 @@ export class Workspace extends DurableObject {
     }));
     return {
       revision: rev,
+      epoch: this.epoch(),
       snapshot: s ? { as_of: s.as_of, source_name: s.source_name, fingerprint: s.fingerprint, fx: s.fx, count: s.opportunities.length } : null,
       opportunities: s?.opportunities ?? [],
       views: s ? views(s) : [],

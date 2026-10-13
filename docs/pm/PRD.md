@@ -32,7 +32,7 @@ No CRM access (HubSpot or other), no ERP, no email, no scheduling, no model call
 | R8 | Narrative and named actions from current state only | Built from the current snapshot only, with no free-text generation and no model |
 | R9 | Accuracy and coverage evaluation | 31 expected/actual cases, plus a broken-rule mode that turns red |
 | R10 | Adoption hypothesis | Stated with an unknown baseline. See [metrics.md](metrics.md) |
-| R11 | Visitor isolation, revision checks, idempotency, bounded state, recovery | One SQLite Durable Object per visitor cookie, `expected_revision` on every command, `Idempotency-Key`, pruning limits, restore and reset |
+| R11 | Visitor isolation, revision checks, idempotency, bounded state, recovery | One SQLite Durable Object per visitor cookie, `expected_revision` on every command, `Idempotency-Key`, pruning limits, restore, and reset as a new empty revision that needs `expected_revision`; request bodies capped in UTF-8 bytes while streaming |
 
 ## Success criteria for the prototype
 These are about whether the prototype behaves correctly. They say nothing about business impact: the automated suite passes, the broken rule fails exactly the cases it should, and the UI checks pass at 1366px and 390px. Actual results are in [test-results.md](test-results.md).

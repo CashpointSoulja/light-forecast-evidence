@@ -113,6 +113,35 @@ for (const [vp, w, hgt] of [["desktop-1366", 1366, 900], ["mobile-390", 390, 844
   check("two tabs: stale tab told to reload, nothing changed", /revision 1; the workspace is now at revision 2/.test(msg), msg.slice(0, 120));
   await ctx.close();
 }
+// Reset is a new revision: the cleared workspace shows a nonzero revision, and a stale tab's reset is refused.
+{
+  const ctx = await b.newContext({ viewport: { width: 1366, height: 900 } });
+  const a = await ctx.newPage(); await a.goto(base + "/#import"); await a.click("text=Clean sample (13 rows)"); await a.click("#commit-btn"); await a.click("#commit-confirm"); await a.waitForSelector(".opp");
+  const stale = await ctx.newPage(); await stale.goto(base + "/#about"); await stale.waitForSelector("#reset-btn");
+  await a.goto(base + "/#about"); await a.click("#reset-btn");
+  check("reset dialog modal", await a.evaluate(() => document.querySelector("#reset-dialog").matches(":modal")));
+  await a.click("#reset-dialog button[value=confirm]");
+  await a.waitForFunction(() => document.querySelector("#rev").textContent === "Revision 2");
+  const asof = await a.textContent("#asof"), msg = await a.textContent("#notice");
+  check("reset: empty workspace shown at revision 2", /Empty workspace \(cleared\)/.test(asof) && /revision 2/.test(msg), `${asof} | ${msg.slice(0, 80)}`);
+  await a.bringToFront();
+  await a.screenshot({ path: `${out}/reset-cleared-desktop.png`, fullPage: true });
+  await a.setViewportSize({ width: 390, height: 844 }); await a.screenshot({ path: `${out}/reset-cleared-mobile.png`, fullPage: true }); await a.setViewportSize({ width: 1366, height: 900 });
+  await a.goto(base + "/#about"); await a.waitForSelector("#history li");
+  const hist = await a.textContent("#history");
+  check("reset: history marks the empty revision and offers no restore", /Revision 2 \(reset\).*\(current, empty\)/.test(hist) && (await a.locator("#history button").count()) === 0, hist.slice(0, 120));
+  await a.goto(base + "/#import"); await a.click("text=Clean sample (13 rows)"); await a.click("#commit-btn"); await a.click("#commit-confirm");
+  await a.waitForFunction(() => document.querySelector("#rev").textContent === "Revision 3");
+  check("reset: reimport continues at revision 3", true);
+  await stale.evaluate(() => window.dispatchEvent(new Event("blur")));
+  await stale.click("#reset-btn"); await stale.click("#reset-dialog button[value=confirm]");
+  await stale.waitForSelector("#notice:not([hidden])");
+  const smsg = await stale.textContent("#notice");
+  await stale.screenshot({ path: `${out}/reset-stale-tab-409.png` });
+  const after = await (await ctx.request.get(base + "/api/state")).json();
+  check("reset: stale tab's reset refused, newer import kept", /nothing was changed/.test(smsg) && after.revision === 3 && after.opportunities.length === 13, `${smsg.slice(0, 100)} | revision ${after.revision}`);
+  await ctx.close();
+}
 await b.close();
 writeFileSync("docs/ui-check-results.json", JSON.stringify({ base: "local wrangler dev", results }, null, 2) + "\n");
 const failed = results.filter((r) => !r.ok).length;

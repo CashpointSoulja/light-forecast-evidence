@@ -18,3 +18,5 @@
 | D14 | 2026-10-13 | No inline styles; strict CSP | Hostile-content defence in depth |
 | D15 | 2026-10-13 | Prepare Workers Free config and dry run only, no deploy | Owner instruction |
 | D16 | 2026-10-13 | Ship the grounded walkthrough script and a deterministic recording flow, not a final video | Owner records the public demo after audit and deployment |
+| D17 | 2026-10-13 | Reset needs `expected_revision` and is recorded as a new empty revision; a reset epoch is stored with every command receipt | Audit finding: reset to revision 0 let a stale tab erase newer work and reused revision numbers. A receipt from an earlier epoch is refused, never replayed |
+| D18 | 2026-10-13 | Request bodies are counted in UTF-8 bytes while streaming, capped at 600,000, and must be valid UTF-8 | Audit finding: the old check trusted Content-Length and then measured string length after buffering |
