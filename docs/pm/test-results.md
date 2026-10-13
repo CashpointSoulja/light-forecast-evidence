@@ -1,5 +1,7 @@
 # Actual test results
 
+> **Historical pre-release record.** Notes here about the app not being deployed or the video not being recorded describe the state before publication. The current release record is [docs/LIVE_RELEASE.md](../LIVE_RELEASE.md).
+
 Run on 2026-10-13 on the `audit-fix` branch against a local `wrangler dev` (workerd with SQLite Durable Objects). The raw command output is in [`docs/test-output/`](../test-output/). Nothing here is hand-edited except that machine paths were replaced with `.`.
 
 | Check | Command | Result | Raw output |

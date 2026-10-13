@@ -1,5 +1,7 @@
 # Claims and caveats ledger
 
+> **Historical pre-release record.** Notes here about the app not being deployed or the video not being recorded describe the state before publication. The current release record is [docs/LIVE_RELEASE.md](../LIVE_RELEASE.md).
+
 | # | Claim made in this repo | Basis | Caveat |
 |---|---|---|---|
 | C1 | Light is hiring an AI & Revenue Operations Lead in London | Public posting (research/SOURCES.md) | Posting may change or close |

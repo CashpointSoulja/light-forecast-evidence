@@ -5,5 +5,5 @@
 - **No copying:** no Light product screens, proprietary fonts, code or customer data are included. Fonts are Rethink Sans and Lora under the SIL Open Font License (`public/fonts/`).
 - **No live-site screenshots** are committed. Research screenshots stayed private.
 - **Data:** all fixtures are synthetic (see `fixtures/README.md`).
-- **Deployment:** configured for Cloudflare Workers Free (`wrangler.jsonc`) and checked with a dry run only. Deploy only to a destination the owner approves, and never over an existing unrelated Worker.
+- **Deployment:** configured for Cloudflare Workers Free (`wrangler.jsonc`) and checked with a dry run only (pre-release state; see the [live release record](docs/LIVE_RELEASE.md)). Deploy only to a destination the owner approves, and never over an existing unrelated Worker.
 - **Code licence:** MIT (see `LICENSE`). The licence covers this code only, not Light's marks.

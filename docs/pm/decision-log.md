@@ -1,5 +1,7 @@
 # Decision log
 
+> **Historical pre-release record.** Notes here about the app not being deployed or the video not being recorded describe the state before publication. The current release record is [docs/LIVE_RELEASE.md](../LIVE_RELEASE.md).
+
 | # | Date | Decision | Reason |
 |---|---|---|---|
 | D1 | 2026-10-13 | Research the role and brand before any code, and commit design.md and the visual guide first | Brief order. Keeps the build grounded in public sources |

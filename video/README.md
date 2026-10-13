@@ -1,5 +1,7 @@
 # Walkthrough script and recording flow
 
+> **Historical pre-release record.** Notes here about the app not being deployed or the video not being recorded describe the state before publication. The current release record is [docs/LIVE_RELEASE.md](../docs/LIVE_RELEASE.md).
+
 The final public-demo video is Ayo Ahmed's delivery after audit and deployment. This folder holds the grounded narration and a deterministic flow that drives the real app, so the walkthrough can be recorded against the deployed URL. **No final video is committed here.** A rehearsal was recorded against a local `wrangler dev` build to check the timing (about 96 s, no gap of 0.6 s or more in the narration). It is not public footage and is not published.
 
 ## Grounded narration (14 scenes, about 96 s)

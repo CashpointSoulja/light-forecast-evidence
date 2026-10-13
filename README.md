@@ -4,6 +4,11 @@
 
 A forecast deal is only called confident when the evidence for its stage is recorded with a source reference. Every total states its denominator, and a board narrative goes out of date as soon as the data changes.
 
+## Live release
+- Live demo: https://light-forecast-evidence.ayoahmed-49d.workers.dev
+- Voiced public walkthrough: https://drive.google.com/file/d/1M5aUFwOwfDfJ3R3YPhmxIrunTlc9NVKR/view?usp=drivesdk&authuser=ayomideahmedcp%40gmail.com
+- Release record: [docs/LIVE_RELEASE.md](docs/LIVE_RELEASE.md)
+
 ![Stage gates at 1366px](docs/screenshots/desktop-1366-gates.png)
 
 ## What it does
@@ -41,9 +46,9 @@ BASE=http://127.0.0.1:8787 CHROME=/path/to/chrome node scripts/ui-check.mjs
 - [PM package](docs/pm/README.md)
 - [Research and sources](research/)
 - [Publication notes and restrictions](PUBLICATION.md)
-- [Walkthrough script and recording flow](video/README.md) (the final video is recorded after deployment)
+- [Walkthrough script and recording flow](video/README.md) (pre-release; the published walkthrough is in the [live release record](docs/LIVE_RELEASE.md))
 
 ## Deployment
-Configured for Cloudflare Workers Free in `wrangler.jsonc` (SQLite Durable Objects). **Not deployed.** Run only the dry run until the owner approves a destination.
+Configured for Cloudflare Workers Free in `wrangler.jsonc` (SQLite Durable Objects). Pre-release note (historical): **Not deployed.** Run only the dry run until the owner approves a destination. This is superseded by the [live release record](docs/LIVE_RELEASE.md).
 
 Light's name and logo belong to Light and are used only as context. Code is MIT licensed © 2026 Ayo Ahmed.
