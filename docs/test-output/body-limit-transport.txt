@@ -1,0 +1,46 @@
+# Oversize streamed request bodies under local wrangler dev 4.150.0 (workerd + miniflare)
+# Probe: node script POSTs a body of spaces to /api/imports/preview as a ReadableStream (no content-length).
+# Client outcome = what fetch saw. Server outcome = lines in the wrangler dev log for the same requests.
+
+## Before the fix (audit-fix at 616c9de): 5,000,000 bytes, 1 KiB chunks, 20 requests
+Client:
+   13  fetch error ECONNRESET
+    4  500 "Error: Network connection lost." (dev entry worker, not application)
+    3  413 {"error":"too_large"} (application JSON)
+Server:
+   11  application logged POST /api/imports/preview 413
+    9  ProxyWorker: Network connection lost
+Sample 500 body (truncated): Error: Network connection lost.
+Sample log line: ✘ [ERROR] Error inside ProxyWorker (the affected request failed; the dev server continues): POST http://127.0.0.1:8790/api/imports/preview (failed after 1 attempt): Network connection lost.
+
+Reading: the application answered 413 for 11 of 20 requests, yet the client got 413 only 3 times. The application stopped
+reading mid-upload and answered early; the local proxy in front of the Worker was still forwarding the body, lost the
+connection, and turned it into a 500 (or the client saw a reset). The 500 does not come from the application code.
+
+## After the fix: refused bytes are read and discarded up to 16 MiB before the 413 is sent
+5,000,000 bytes at 1 KiB, 64 KiB and 5,000,000-byte chunks, 20 requests each (60 total)
+Client:
+   60  413 {"error":"too_large"} (application JSON)
+Server:
+   60  application logged POST /api/imports/preview 413
+
+## Beyond the drain bound (by design): 20,000,000 bytes, 64 KiB chunks, 10 requests
+Client:
+    6  413 {"error":"too_large"} (application JSON)
+    3  500 "Error: Network connection lost." (dev entry worker, not application)
+    1  fetch error ECONNRESET
+Server:
+    6  application logged POST /api/imports/preview 413
+    4  ProxyWorker: Network connection lost
+Past 16 MiB the stream is cancelled rather than drained, so the same transport loss returns for these requests.
+In those 4 failures the dev log shows only the proxy error. In every case the Worker holds at most 600,000 bytes of a body
+and never parses an oversized one.
+
+## The strengthened test against the pre-fix src/body.ts
+   × request body limits > refuses a declared oversize body and a stream far beyond the limit 86ms
+     → fetch failed
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+TypeError: fetch failed
+Caused by: Error: write ECONNRESET
+Serialized Error: { errno: -104, code: 'ECONNRESET', syscall: 'write' }
+      Tests  1 failed | 21 skipped (22)

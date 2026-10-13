@@ -1,7 +1,9 @@
 
  RUN  v3.2.7 .
 
- ✓ test/engine.test.ts > happy path > imports the clean fixture with exact source references 12ms
+ ✓ test/api.test.ts > API happy path > preview saves nothing; commit creates one revision 68ms
+ ✓ test/api.test.ts > API happy path > serves security headers and an HttpOnly visitor cookie 17ms
+ ✓ test/engine.test.ts > happy path > imports the clean fixture with exact source references 25ms
  ✓ test/engine.test.ts > happy path > evaluation suite passes as designed 6ms
  ✓ test/engine.test.ts > happy path > broken rule turns the suite red on the cases it should 4ms
  ✓ test/engine.test.ts > rejected inputs > file error: missing as_of 1ms
@@ -16,7 +18,7 @@
  ✓ test/engine.test.ts > rejected inputs > file error: unknown directive 0ms
  ✓ test/engine.test.ts > rejected inputs > rejects oversize and over-row files 3ms
  ✓ test/engine.test.ts > rejected inputs > row rejected: amount with separator 1ms
- ✓ test/engine.test.ts > rejected inputs > row rejected: three decimals 0ms
+ ✓ test/engine.test.ts > rejected inputs > row rejected: three decimals 2ms
  ✓ test/engine.test.ts > rejected inputs > row rejected: negative amount 0ms
  ✓ test/engine.test.ts > rejected inputs > row rejected: lowercase currency 0ms
  ✓ test/engine.test.ts > rejected inputs > row rejected: bad stage 0ms
@@ -33,13 +35,13 @@
  ✓ test/engine.test.ts > rejected inputs > parses quoted cells with commas, doubled quotes and newlines 0ms
  ✓ test/engine.test.ts > rejected inputs > compares dates as calendar days, not strings 0ms
  ✓ test/engine.test.ts > hostile content > rejects formula, bidi and control characters but keeps markup as inert text 1ms
- ✓ test/engine.test.ts > hostile content > prompt-like notes cannot change classification 0ms
+ ✓ test/engine.test.ts > hostile content > prompt-like notes cannot change classification 1ms
  ✓ test/engine.test.ts > hostile content > escapes Markdown in exported narratives 1ms
- ✓ test/engine.test.ts > evidence gates and staleness > a fully evidenced negotiation deal is commit 0ms
- ✓ test/engine.test.ts > evidence gates and staleness > claimed field without ref blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > a fully evidenced negotiation deal is commit 1ms
+ ✓ test/engine.test.ts > evidence gates and staleness > claimed field without ref blocks confident classification 1ms
  ✓ test/engine.test.ts > evidence gates and staleness > unknown field blocks confident classification 0ms
  ✓ test/engine.test.ts > evidence gates and staleness > EB engagement 31 days old blocks confident classification 0ms
- ✓ test/engine.test.ts > evidence gates and staleness > EB engagement without ref blocks confident classification 0ms
+ ✓ test/engine.test.ts > evidence gates and staleness > EB engagement without ref blocks confident classification 1ms
  ✓ test/engine.test.ts > evidence gates and staleness > discount unknown blocks confident classification 0ms
  ✓ test/engine.test.ts > evidence gates and staleness > discount above threshold, no approval blocks confident classification 0ms
  ✓ test/engine.test.ts > evidence gates and staleness > approval pending at negotiation blocks confident classification 0ms
@@ -51,39 +53,37 @@
  ✓ test/engine.test.ts > evidence gates and staleness > stale next step is flagged below negotiation without blocking 1ms
  ✓ test/engine.test.ts > evidence gates and staleness > evidenced stage is the highest contiguous passing gate 0ms
  ✓ test/engine.test.ts > evidence gates and staleness > closed won without a contract ref is unverified and excluded 0ms
- ✓ test/engine.test.ts > reconciliation > never converts a currency without an imported rate 0ms
- ✓ test/engine.test.ts > reconciliation > uses exact integer money with half-up rounding 0ms
+ ✓ test/engine.test.ts > reconciliation > never converts a currency without an imported rate 1ms
+ ✓ test/engine.test.ts > reconciliation > uses exact integer money with half-up rounding 1ms
  ✓ test/engine.test.ts > reconciliation > category totals always reconcile to gross pipeline 1ms
  ✓ test/engine.test.ts > narrative from current state only > is stamped with its revision and marked superseded in exports from a later one 1ms
  ✓ test/engine.test.ts > narrative from current state only > names the owner on every action and only for deals in the snapshot 2ms
- ✓ test/engine.test.ts > narrative from current state only > does not state time saved or forecast lift 2ms
+ ✓ test/engine.test.ts > narrative from current state only > does not state time saved or forecast lift 3ms
  ✓ test/engine.test.ts > narrative from current state only > a single opportunity view does not depend on other rows 2ms
- ✓ test/api.test.ts > API happy path > preview saves nothing; commit creates one revision 68ms
- ✓ test/api.test.ts > API happy path > serves security headers and an HttpOnly visitor cookie 15ms
- ✓ test/api.test.ts > API rejected inputs > a file with any rejected row has no preview id and cannot be committed 22ms
- ✓ test/api.test.ts > API rejected inputs > refuses non-JSON, cross-origin, missing keys and bad JSON 26ms
- ✓ test/api.test.ts > API rejected inputs > refuses evidence without a source reference or with a formula 42ms
- ✓ test/api.test.ts > revisions, staleness and narratives > a new revision supersedes older narratives, which cannot be marked board-ready 61ms
- ✓ test/api.test.ts > concurrent actions > two tabs committing against the same revision: exactly one wins, the other gets 409 42ms
- ✓ test/api.test.ts > concurrent actions > ten parallel evidence edits against one revision produce one new revision 60ms
- ✓ test/api.test.ts > concurrent actions > idempotent replay returns the original result; reusing a key for another body is refused 35ms
- ✓ test/api.test.ts > visitor isolation > one visitor's import is invisible to another, and a forged cookie gets a fresh workspace 39ms
- ✓ test/api.test.ts > visitor isolation > reset clears only the caller's workspace 46ms
- ✓ test/api.test.ts > recovery and bounds > restoring an older revision creates a new revision with the old contents 38ms
- ✓ test/api.test.ts > recovery and bounds > a retry after a lost response does not double-apply 39ms
- ✓ test/api.test.ts > recovery and bounds > a failed command leaves state untouched 35ms
- ✓ test/api.test.ts > recovery and bounds > keeps at most 30 revisions and 20 narratives 373ms
- ✓ test/api.test.ts > reset safety > reset needs the current expected_revision, so a stale tab cannot erase newer work 56ms
- ✓ test/api.test.ts > reset safety > revision numbers keep rising across resets and are never reused 81ms
- ✓ test/api.test.ts > reset safety > stale pre-reset imports, evidence, board-ready and restores cannot act after a reset and reimport 112ms
- ✓ test/api.test.ts > reset safety > a receipt from before a reset cannot claim a mutation in the new workspace 82ms
- ✓ test/api.test.ts > request body limits > counts UTF-8 bytes, not characters, while streaming without a content-length 50ms
+ ✓ test/api.test.ts > API rejected inputs > a file with any rejected row has no preview id and cannot be committed 21ms
+ ✓ test/api.test.ts > API rejected inputs > refuses non-JSON, cross-origin, missing keys and bad JSON 28ms
+ ✓ test/api.test.ts > API rejected inputs > refuses evidence without a source reference or with a formula 59ms
+ ✓ test/api.test.ts > revisions, staleness and narratives > a new revision supersedes older narratives, which cannot be marked board-ready 66ms
+ ✓ test/api.test.ts > concurrent actions > two tabs committing against the same revision: exactly one wins, the other gets 409 49ms
+ ✓ test/api.test.ts > concurrent actions > ten parallel evidence edits against one revision produce one new revision 59ms
+ ✓ test/api.test.ts > concurrent actions > idempotent replay returns the original result; reusing a key for another body is refused 41ms
+ ✓ test/api.test.ts > visitor isolation > one visitor's import is invisible to another, and a forged cookie gets a fresh workspace 37ms
+ ✓ test/api.test.ts > visitor isolation > reset clears only the caller's workspace 64ms
+ ✓ test/api.test.ts > recovery and bounds > restoring an older revision creates a new revision with the old contents 35ms
+ ✓ test/api.test.ts > recovery and bounds > a retry after a lost response does not double-apply 40ms
+ ✓ test/api.test.ts > recovery and bounds > a failed command leaves state untouched 37ms
+ ✓ test/api.test.ts > recovery and bounds > keeps at most 30 revisions and 20 narratives 397ms
+ ✓ test/api.test.ts > reset safety > reset needs the current expected_revision, so a stale tab cannot erase newer work 49ms
+ ✓ test/api.test.ts > reset safety > revision numbers keep rising across resets and are never reused 79ms
+ ✓ test/api.test.ts > reset safety > stale pre-reset imports, evidence, board-ready and restores cannot act after a reset and reimport 114ms
+ ✓ test/api.test.ts > reset safety > a receipt from before a reset cannot claim a mutation in the new workspace 90ms
+ ✓ test/api.test.ts > request body limits > counts UTF-8 bytes, not characters, while streaming without a content-length 57ms
+ ✓ test/api.test.ts > request body limits > refuses a declared oversize body and a stream far beyond the limit 1107ms
  ✓ test/api.test.ts > request body limits > rejects invalid UTF-8 and accepts valid multibyte text 20ms
- ✓ test/api.test.ts > request body limits > refuses a declared oversize body and a stream far beyond the limit 27ms
 
  Test Files  2 passed (2)
       Tests  79 passed (79)
-   Start at  17:03:43
-   Duration  2.80s (transform 122ms, setup 0ms, collect 149ms, tests 1.42s, environment 0ms, prepare 82ms)
+   Start at  17:57:15
+   Duration  4.29s (transform 101ms, setup 0ms, collect 126ms, tests 2.60s, environment 0ms, prepare 86ms)
 
 exit 0

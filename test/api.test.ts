@@ -303,6 +303,21 @@ describe("request body limits", () => {
     expect((await v.state()).body.revision).toBe(0);
   });
 
+  // The 413 must be the application's own JSON answer, every time, and the client must stay usable afterwards.
+  it("refuses a declared oversize body and a stream far beyond the limit", async () => {
+    const v = new Visitor(); await v.state();
+    for (let i = 0; i < 5; i++) {
+      const declared = await send(v, multibyte(299_995, "a"), false);
+      expect([declared.status, declared.body.error]).toEqual([413, "too_large"]);
+      for (const chunk of [1024, 64 * 1024]) {
+        const big = new Uint8Array(5_000_000).fill(0x20);
+        const r = await v.req("/api/imports/preview", { method: "POST", headers: { "content-type": "application/json" }, body: stream(big, chunk), duplex: "half" } as RequestInit);
+        expect([r.status, r.body.error]).toEqual([413, "too_large"]);
+      }
+    }
+    expect((await v.state()).body.revision).toBe(0);
+  });
+
   it("rejects invalid UTF-8 and accepts valid multibyte text", async () => {
     const v = new Visitor(); await v.state();
     const bad = new Uint8Array([...new TextEncoder().encode('{"csv":"'), 0xc3, 0x28, ...new TextEncoder().encode('"}')]);
@@ -311,12 +326,5 @@ describe("request body limits", () => {
     const csv = FIXTURES["pipeline-q4"].replace("Northwind Ledger", "Nørthwind Lédger €");
     const ok = await send(v, new TextEncoder().encode(JSON.stringify({ csv })), true);
     expect([ok.status, ok.body.committable]).toEqual([200, true]);
-  });
-
-  // Last in the file: the server stops reading mid-upload, which resets that client connection.
-  it("refuses a declared oversize body and a stream far beyond the limit", async () => {
-    const v = new Visitor(); await v.state();
-    expect((await send(v, multibyte(299_995, "a"), false)).status).toBe(413);
-    expect((await send(v, new Uint8Array(5_000_000).fill(0x20), true)).status).toBe(413);
   });
 });
